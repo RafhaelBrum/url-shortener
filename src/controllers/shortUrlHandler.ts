@@ -40,7 +40,7 @@ export async function getOriginalUrlHandler(req: Request, res: Response) {
 export async function updateShortUrlHandler(req: Request, res: Response) {
     try {
         const shortcode = req.params.shortcode;
-        const url = String(req.query.newUrl);
+        const url = req.body.url;
         if (!url) {
             res.status(400).json({ error: 'New URL is required' });
             return;
