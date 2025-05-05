@@ -1,10 +1,6 @@
 import { shortUrlInput } from "../types/shortUrl";
 import pool from '../db';
 
-function urlValidator(url: string) {
-
-};
-
 async function generateUniqueShortcode() {
     while (true) {
         const shortcode = Math.random().toString(36).substring(2, 8);

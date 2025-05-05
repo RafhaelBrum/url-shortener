@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createShortUrl } from "../models/postModel";
+import { createShortUrl } from "../models/shortUrlModel";
 import { shortUrlInput } from "../types/shortUrl";
 import validator from 'validator';
 
