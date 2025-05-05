@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createShortUrl, getOriginalUrl, updateShortUrl } from "../models/shortUrlModel";
+import { createShortUrl, deleteShortUrl, getOriginalUrl, updateShortUrl } from "../models/shortUrlModel";
 import { shortUrlInput } from "../types/shortUrl";
 import validator from 'validator';
 
@@ -35,7 +35,7 @@ export async function getOriginalUrlHandler(req: Request, res: Response) {
         console.log(error);
         res.status(500).json({ error: 'Internal server error' });
     }
-}
+};
 
 export async function updateShortUrlHandler(req: Request, res: Response) {
     try {
@@ -64,4 +64,27 @@ export async function updateShortUrlHandler(req: Request, res: Response) {
         console.log(error);
         res.status(500).json({ error: 'Internal server error' });
     }
+};
+
+export async function deleteShortUrlHandler(req: Request, res: Response) {
+    try {
+        const shortcode = req.params.shortcode;
+        if (!shortcode) {
+            res.status(400).json({ error: 'Bad request' });
+            return;
+        }
+
+        const result = await deleteShortUrl(shortcode);
+        if (!result) {
+            res.status(404).json({ error: 'Shortcode not found' });
+            return
+        }
+
+
+        res.status(204).send();
+
+    } catch (error) {
+        res.status(500).json({ error: 'Internal serevr error' });
+    }
+
 };
