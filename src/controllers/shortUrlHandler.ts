@@ -21,7 +21,7 @@ export async function createShortUrlHandler(req: Request, res: Response) {
     }
 };
 
-export async function getOriginalUrlHandler(req: Request, res: Response) {
+export async function getOriginalUrlHandler(req: Request, res: Response) { // OBSOLETO PELO getShortUrlStats() e pelo redirectHandler()
     try {
         const shortcode = req.params.shortcode;
         const data = await getOriginalUrl(shortcode);
