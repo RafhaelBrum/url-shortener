@@ -29,8 +29,16 @@ export async function createShortUrl(data: shortUrlInput) {
 
 };
 
-export async function getOriginalUrl(shortcode: string) {
+export async function getOriginalUrl(shortcode: string): Promise<shortUrlInput | undefined> {
+    try {
+        const QUERY = 'SELECT * FROM urls WHERE short_code = $1';
+        const VALUES = [shortcode];
+        const result = await pool.query(QUERY, VALUES);
 
+        return result.rows[0];
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 export async function updateShortUrl(shortcode: string, newUrl: string) {
