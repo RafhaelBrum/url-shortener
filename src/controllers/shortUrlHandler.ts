@@ -104,7 +104,6 @@ export async function getShortUrlStatsHandler(req: Request, res: Response) {
         }
 
         res.status(200).json(data);
-
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
