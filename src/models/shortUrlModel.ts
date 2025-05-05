@@ -61,7 +61,15 @@ export async function updateShortUrl(shortcode: string, newUrl: string) {
 };
 
 export async function deleteShortUrl(shortcode: string) {
+    try {
+        const QUERY = 'DELETE FROM urls WHERE short_code = $1 RETURNING *;'
+        const VALUES = [shortcode];
+        const result = await pool.query(QUERY, VALUES);
 
+        return result.rows[0];
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 export async function getShortUrlStats(shortcode: string) {
