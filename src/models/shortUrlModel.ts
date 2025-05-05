@@ -78,7 +78,7 @@ export async function getShortUrlStats(shortcode: string) {
         const VALUES = [shortcode];
         const result = await pool.query(QUERY, VALUES);
 
-        return result;
+        return result.rows[0];
     } catch (error) {
         console.log(error);
     }
